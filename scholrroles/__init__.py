@@ -1,0 +1,1 @@
+from scholrroles.behaviour import registry
