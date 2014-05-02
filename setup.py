@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='ScholrRoles',
-    version='0.0.21',
+    version='0.0.22',
     author='Jorge Alpedrinha Ramos',
     author_email='jalpedrinharamos@gmail.com',
     packages=['scholrroles'],
