@@ -1,6 +1,8 @@
 from scholrroles.behaviour import registry, RoleBehaviour
 
-
+def initiate_roles(sender, request, **kwargs):
+    pass
+    
 def autodiscover():
     """
     Auto-discover INSTALLED_APPS admin.py modules and fail silently when
