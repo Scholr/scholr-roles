@@ -3,21 +3,8 @@ from django.db.models.loading import get_model
 
 class RolesBackend(ModelBackend):
 
-    #def has_perm(self, user_obj, perm, obj=None):
-        # if user_obj.is_superuser:
-        #     return True
-        # perm_parts = perm.split('_')
-        # app_label = perm_parts[0]
-        # model_name = perm_parts[1]
-        
-        # permission = '_'.join(perm_parts[2:])
-        # if not obj:
-        #     model = get_model(app_label, model_name,
-        #           seed_cache=False, only_installed=False)
-        #     return model.has_model_perm(user_obj,permission)
-
-        # else:
-        #     return obj.has_instance_perm(user_obj, permission)
+    def has_perm(self, user_obj, perm, obj=None):
+        print 'has_perm', user_obj, perm, obj
 
 
     # def has_module_perms(self, user_obj, app_label):
