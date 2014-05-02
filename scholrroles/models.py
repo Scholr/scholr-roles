@@ -13,7 +13,7 @@ class Role(models.Model):
 
 
 class Permission(models.Model):
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, related_name="permissions")
     name = models.CharField(max_length=255)
     instance_perm = models.BooleanField(default=False)
 
