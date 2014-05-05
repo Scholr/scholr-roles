@@ -1,11 +1,12 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
+from io import open
 
 setup(
     name='ScholrRoles',
     version='0.0.27',
     author='Jorge Alpedrinha Ramos',
     author_email='jalpedrinharamos@gmail.com',
-    packages=['scholrroles'],
+    packages=find_packages(),
     package_data = { '': ['*.yml']},
     #scripts=['bin/stowe-towels.py','bin/wash-towels.py'],
     #url='http://pypi.python.org/pypi/TowelStuff/',
