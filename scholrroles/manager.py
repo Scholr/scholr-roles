@@ -8,7 +8,6 @@ class PermissionManager(object):
     permissions = None
 
     def __init__(self, request = None):
-        print 'teste 1 2'
         for role in Role.objects.all():
             role_manager = registry.get_role(role.name)(request)
             print role_manager.has_role()
@@ -25,7 +24,6 @@ class PermissionManager(object):
             app_label, model, perm_name = perm.split('_')
             ctype = ContentType.objects.get_by_natural_key(app_label, model)
             perm = self.permissions.get(name=perm_name, content_type = ctype, instance_perm = obj != None)
-            print 'perm', perm
             if obj:
                 for role in perm.roles.all():
                     print role
