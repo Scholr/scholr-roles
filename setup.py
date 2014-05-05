@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='ScholrRoles',
-    version='0.0.25',
+    version='0.0.26',
     author='Jorge Alpedrinha Ramos',
     author_email='jalpedrinharamos@gmail.com',
     packages=['scholrroles'],
@@ -12,6 +12,6 @@ setup(
     description='Django permissions engine.',
     long_description=open('README.txt').read(),
     install_requires=[
-        "Django == 1.5",
+        "Django >= 1.5",
     ],
 )
