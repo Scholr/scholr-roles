@@ -5,15 +5,19 @@ from scholrroles.models import Role, Permission
 
 class PermissionManager(object):
     roles = {}
-    permissions = None
+    _permissions = None
 
     def __init__(self, user, request = None):
         for role in Role.objects.all():
             role_manager = registry.get_role(role.name)(user,request)
             if role_manager.has_role():
                 self.roles[role.name] = role_manager
-        self.permissions = Permission.objects.filter(roles__name__in = self.roles.keys())
-
+        self._permissions = Permission.objects.filter(roles__name__in = self.roles.keys()).values_list('pk', flat=True)
+    
+    @property
+    def permissions(self):
+        return Permission.objects.filter(pk__in=self._permissions)
+    
     def has_role(self, name, obj = None):
         return name in self.roles and self.roles[name].has_role_for(obj)
 
