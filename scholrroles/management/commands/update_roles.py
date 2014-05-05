@@ -102,6 +102,8 @@ class Command(BaseCommand):
                     Delete Permissions
                 --------------------
             """
+            for perm in to_delete:
+                print perm
             to_delete.delete()
     
     def update_perm_roles(self, perm, existing_perm):
