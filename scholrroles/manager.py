@@ -19,7 +19,18 @@ class PermissionManager(object):
         return Permission.objects.filter(pk__in=self._permissions)
     
     def has_role(self, name, obj = None):
-        return name in self.roles and self.roles[name].has_role_for(obj)
+        if not isinstance(name, list):
+            name = [name]
+        for name in name:
+            has_role = name in self.roles and self.roles[name].has_role_for(obj)
+            if has_role:
+                return True
+        return False
+
+    def get_role_ids(self, name):
+        if name in self.roles:
+            return self.roles[name].ids
+        return []
 
     def has_perm(self, perm, obj =None):
         try:
