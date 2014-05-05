@@ -10,10 +10,8 @@ class PermissionManager(object):
     def __init__(self, request = None):
         for role in Role.objects.all():
             role_manager = registry.get_role(role.name)(request)
-            print role_manager.has_role()
             if role_manager.has_role():
                 self.roles[role.name] = role_manager
-        print self.roles.keys()
         self.permissions = Permission.objects.filter(roles__name__in = self.roles.keys())
 
     def has_role(self, name, obj = None):
@@ -26,8 +24,8 @@ class PermissionManager(object):
             perm = self.permissions.get(name=perm_name, content_type = ctype, instance_perm = obj != None)
             if obj:
                 for role in perm.roles.all():
-                    print self.roles[role].has_role_for(obj)
-                    if self.roles[role].has_role_for(obj):
+                    print self.roles[role.name].has_role_for(obj)
+                    if self.roles[role.name].has_role_for(obj):
                         return True
                 return False
             else:
