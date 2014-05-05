@@ -6,6 +6,7 @@ setup(
     author='Jorge Alpedrinha Ramos',
     author_email='jalpedrinharamos@gmail.com',
     packages=['scholrroles'],
+    package_data = { '': ['*.yml']},
     #scripts=['bin/stowe-towels.py','bin/wash-towels.py'],
     #url='http://pypi.python.org/pypi/TowelStuff/',
     license='LICENSE.txt',
@@ -14,5 +15,4 @@ setup(
     install_requires=[
         "Django >= 1.5",
     ],
-    include_package_data = True,
 )
