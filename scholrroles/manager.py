@@ -19,12 +19,12 @@ class PermissionManager(object):
 
     def has_perm(self, perm, obj =None):
         try:
-            app_label, model, perm_name = perm.split('_')
+            split = perm.split('_')
+            app_label, model, perm_name = split[0], split[1], '_'.join(split[2:])
             ctype = ContentType.objects.get_by_natural_key(app_label, model)
             perm = self.permissions.get(name=perm_name, content_type = ctype, instance_perm = obj != None)
             if obj:
                 for role in perm.roles.all():
-                    print self.roles[role.name].has_role_for(obj)
                     if self.roles[role.name].has_role_for(obj):
                         return True
                 return False
