@@ -25,7 +25,7 @@ class PermissionManager(object):
             perm = self.permissions.get(name=perm_name, content_type = ctype, instance_perm = obj != None)
             if obj:
                 for role in perm.roles.all():
-                    if self.roles[role.name].has_role_for(obj):
+                    if role.name in self.roles and self.roles[role.name].has_role_for(obj):
                         return True
                 return False
             else:
