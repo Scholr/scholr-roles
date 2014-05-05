@@ -19,6 +19,7 @@ class PermissionManager(object):
 
     def has_perm(self, perm, obj =None):
         try:
+            print self.roles.keys()
             split = perm.split('_')
             app_label, model, perm_name = split[0], split[1], '_'.join(split[2:])
             print app_label, model, perm_name
