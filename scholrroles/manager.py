@@ -8,6 +8,7 @@ class PermissionManager(object):
     permissions = None
 
     def __init__(self, request = None):
+        print 'teste 1 2'
         for role in Role.objects.all():
             role_manager = registry.get_role(role.name)(request)
             print role_manager.__class__.__name__
