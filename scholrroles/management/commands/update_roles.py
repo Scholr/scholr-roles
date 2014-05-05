@@ -66,28 +66,43 @@ class Command(BaseCommand):
                 print role
                 Role.objects.create(name = role)
 
-        print """
-            --------------------
-                Delete Roles
-            --------------------
-        """
+
         to_delete = [x for x in existing_roles if x not in roles]
-        for role in to_delete:
-            print role
-        Role.objects.filter(name__in = to_delete).delete()
+        if to_delete:
+            print """
+                --------------------
+                    Delete Roles
+                --------------------
+            """
+            for role in to_delete:
+                print role
+            Role.objects.filter(name__in = to_delete).delete()
 
     def update_perms(self, perms):
         existing_perms = Permission.objects.all()
+        dont_delete = []
         for perm in perms:
+
             existing_perm = existing_perms.filter(content_type=ContentType.objects.get_by_natural_key(perm['app_label'], perm['model']), 
                 name = perm['name'], instance_perm = perm['instance_perm'])
             if existing_perm:
                 self.update_perm_roles(perm, existing_perm[0])
+                dont_delete.append(existing_perm[0].pk)
             else:
                 existing_perm = Permission.objects.create(content_type=ContentType.objects.get_by_natural_key(perm['app_label'], perm['model']), 
                     name = perm['name'], instance_perm = perm['instance_perm'])
+                dont_delete.append(existing_perm.pk)
                 print u"    Created Permission: ".format(existing_perm)
                 self.update_perm_roles(perm, existing_perm)
+
+        to_delete = Permission.objects.exclude(pk__in=dont_delete)
+        if to_delete:
+            print """
+                --------------------
+                    Delete Permissions
+                --------------------
+            """
+            to_delete.delete()
     
     def update_perm_roles(self, perm, existing_perm):
         if existing_perm.roles.filter(name__in=perm['roles']).count() < len(perm['roles']):
