@@ -1,4 +1,4 @@
-from scholrroles.behaviour import registry
+from scholrroles.behaviour import registry, RoleBehaviour
 from scholrroles.manager import PermissionManager
 
 def initiate_roles(sender, request, **kwargs):
