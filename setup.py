@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='ScholrRoles',
-    version='0.0.26',
+    version='0.0.27',
     author='Jorge Alpedrinha Ramos',
     author_email='jalpedrinharamos@gmail.com',
     packages=['scholrroles'],
@@ -14,4 +14,5 @@ setup(
     install_requires=[
         "Django >= 1.5",
     ],
+    include_package_data = True,
 )
