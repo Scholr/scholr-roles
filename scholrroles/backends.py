@@ -3,7 +3,7 @@ from django.db.models.loading import get_model
 
 class RolesBackend(ModelBackend):
 
-    def has_perm(self, user_obj, perm, obj=None):
+    def has_perm(self, user_obj, perm, obj=None):        
         return user_obj.permissions.has_perm(perm, obj)
 
 
