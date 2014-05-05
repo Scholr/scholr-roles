@@ -18,8 +18,10 @@ class PermissionManager(object):
     def has_perm(self, perm, obj =None):
         try:
             perm = self.permissions.get(name=perm)
+            print 'perm', perm
             if obj:
                 for role in perm.roles:
+                    print role
                     if self.roles[role].has_role_for(obj):
                         return True
                 return False

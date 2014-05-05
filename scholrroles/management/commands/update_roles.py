@@ -29,11 +29,12 @@ class Command(BaseCommand):
             roles.extend(data['roles'])
         self.update_roles(roles)
         
-        files = self.get_permission_files()
+        files, perms = self.get_permission_files(), []
         for perm_file in files:
             stream = open(perm_file, 'r')
             data = yaml.load(stream)
-            self.update_perms(data['perms'])
+            perms.extend(data['perms'])
+        self.update_perms(perms)
 
     def get_roles_files(self):
         files = []
