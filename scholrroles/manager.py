@@ -11,9 +11,10 @@ class PermissionManager(object):
         print 'teste 1 2'
         for role in Role.objects.all():
             role_manager = registry.get_role(role.name)(request)
-            print role_manager.__class__.__name__
+            print role_manager.has_role()
             if role_manager.has_role():
                 self.roles[role.name] = role_manager
+        print self.roles.keys()
         self.permissions = Permission.objects.filter(roles__name__in = self.roles.keys())
 
     def has_role(self, name, obj = None):
