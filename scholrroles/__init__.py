@@ -7,7 +7,8 @@ def set_permission(user, request):
     
 def initiate_roles(sender, request, **kwargs):
     user = request.user if hasattr(request,'user') else None
-    set_permission(user, request)
+    if user:
+        user.permissions = set_permission(user, request)
 
 def autodiscover():
     """
