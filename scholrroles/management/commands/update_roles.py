@@ -23,12 +23,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         files, roles = self.get_roles_files(), []
-        print files
         for role_file in files:
             stream = open(role_file, 'r')
             data = yaml.load(stream)
             roles.extend(data['roles'])
-            print roles
         self.update_roles(roles)
         
         files = self.get_permission_files()
@@ -42,7 +40,6 @@ class Command(BaseCommand):
         for app in settings.INSTALLED_APPS:
             module = import_module(app)
             pth = os.path.abspath(module.__path__[0])
-            print pth, os.path.isfile(pth + '/roles.yml')
             if os.path.isfile(pth + '/roles.yml'):
                 files.append(pth + '/roles.yml')
         return files
