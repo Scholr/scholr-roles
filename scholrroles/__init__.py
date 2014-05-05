@@ -2,6 +2,7 @@ from scholrroles.behaviour import registry, RoleBehaviour
 from scholrroles.manager import PermissionManager
 
 def initiate_roles(sender, request, **kwargs):
+    print 'initiate roles'
     request.session['permissions'] = PermissionManager(request)
     request.session.modified = True
 
