@@ -6,5 +6,5 @@ class PermissionsMiddleware(object):
         print 'PMiddleware', request.session.get('permissions',None).roles
         if hasattr(request, 'user') and not hasattr(request.user,'permissions') :
             print request.session.get('permissions',None)
-            request.user.permissions = request.session.get('permissions', PermissionManager(request))
+            request.user.permissions = request.session.get('permissions', None)
 
