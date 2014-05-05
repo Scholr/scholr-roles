@@ -10,6 +10,10 @@ class Role(models.Model):
         if self._behaviour:
             return self._behaviour
         self._behaviour = registry.get_role(self.name)
+   
+    def __unicode__(self):
+        return u'{}'.format(self.name)
+
 
 
 class Permission(models.Model):
@@ -17,4 +21,7 @@ class Permission(models.Model):
     name = models.CharField(max_length=255)
     instance_perm = models.BooleanField(default=False)
     roles = models.ManyToManyField(Role)
+
+    def __unicode__(self):
+        return u'{} {}'.format(self.name, 'model' if not self.instance_perm else 'instance')
 
