@@ -1,12 +1,14 @@
 from scholrroles.behaviour import registry, RoleBehaviour
 from scholrroles.manager import PermissionManager
 
-def initiate_roles(sender, request, **kwargs):
-    print 'initiate roles'
-    request.session['permissions'] = PermissionManager(request)
-    request.session.modified = True
+def set_permission(user, request):
+    user.permissions = PermissionManager(user, request)
 
     
+def initiate_roles(sender, request, **kwargs):
+    user = request.user if hasattr(request,'user') else None
+    set_permission(user, request)
+
 def autodiscover():
     """
     Auto-discover INSTALLED_APPS admin.py modules and fail silently when

@@ -5,7 +5,8 @@ class RoleBehaviour(object):
     ids = []
     object_accessors = {}
 
-    def __init__(self, request):
+    def __init__(self, user, request):
+        self.user = user
         self.request = request
 
     def has_role(self):
