@@ -34,6 +34,6 @@ class PermissionManager(object):
                 return False
             else:
                 return True
-        except:
-            print perm, obj
+        except Exception as e:
+            print perm, obj, e
             return False
