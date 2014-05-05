@@ -17,6 +17,7 @@ class PermissionManager(object):
 
     def has_perm(self, perm, obj =None):
         try:
+            print self.permissions, perm
             perm = self.permissions.get(name=perm)
             print 'perm', perm
             if obj:

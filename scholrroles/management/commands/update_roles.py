@@ -70,9 +70,9 @@ class Command(BaseCommand):
         to_delete = [x for x in existing_roles if x not in roles]
         if to_delete:
             print """
-                --------------------
-                    Delete Roles
-                --------------------
+            --------------------
+                Delete Roles
+            --------------------
             """
             for role in to_delete:
                 print role
@@ -98,9 +98,9 @@ class Command(BaseCommand):
         to_delete = Permission.objects.exclude(pk__in=dont_delete)
         if to_delete:
             print """
-                --------------------
-                    Delete Permissions
-                --------------------
+            --------------------
+             Delete Permissions
+            --------------------
             """
             for perm in to_delete:
                 print perm
