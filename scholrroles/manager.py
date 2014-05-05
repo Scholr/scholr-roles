@@ -12,19 +12,22 @@ class PermissionManager(object):
             role_manager = registry.get_role(role.name)(request)
             if role_manager.has_role():
                 self.roles[role.name] = role_manager
-        self.permissions = Permission.objects.filter(roles__name__in = self.roles.keys())
+        self._permissions = list(self.permissions.values_list('pk', flat=True))
 
     def has_role(self, name, obj = None):
         return name in self.roles and self.roles[name].has_role_for(obj)
 
+    def get_permissions(self):
+        return Permission.objects.filter(pk__in = self._permissions)
     def has_perm(self, perm, obj =None):
         try:
+            permissions = self.get_permissions()
             print self.roles.keys()
             split = perm.split('_')
             app_label, model, perm_name = split[0], split[1], '_'.join(split[2:])
             print app_label, model, perm_name
             ctype = ContentType.objects.get_by_natural_key(app_label, model)
-            perm = self.permissions.get(name=perm_name, content_type = ctype, instance_perm = obj != None)
+            perm = permissions.get(name=perm_name, content_type = ctype, instance_perm = obj != None)
             if obj:
                 for role in perm.roles.all():
                     if role.name in self.roles and self.roles[role.name].has_role_for(obj):
