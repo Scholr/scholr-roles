@@ -26,7 +26,7 @@ class PermissionManager(object):
             app_label, model, perm_name = perm.split('_')
             ctype = ContentType.objects.get_by_natural_key(app_label, model)
             print self.permissions.filter(name=perm_name), perm_name
-            perm = self.permissions.get(name=perm_name, content_type = ctype)
+            perm = self.permissions.get(name=perm_name, content_type = ctype, instance_perm = obj != None)
             print 'perm', perm
             if obj:
                 for role in perm.roles:
