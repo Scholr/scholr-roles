@@ -20,6 +20,7 @@ class RoleBehaviour(object):
 
 
 class UserBehaviour(RoleBehaviour):
+    role= 'user'
     def has_role(self):
         return True
 
