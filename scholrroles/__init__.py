@@ -12,17 +12,16 @@ def initiate_roles(sender, request, **kwargs):
     if user:
         user.permissions = set_permission(user, request)
 
-def import_from_string(name):
-    mod = __import__(name)
-    components = name.split('.')
-    for comp in components[1:]:
-        mod = getattr(mod, comp)
+def import_class_from_string(name):
+    split = name.split('.')
+    mod = __import__(split[:-2], fromlist= [split[-1]] )
+    mod = getattr(mod, split[-1])
     return mod
 
 
 #REGISTER USER ROLE BEHAVIOUR
 user_behaviour_name =getattr(settings, 'SCHOLR_ROLES_USER_BEHAVIOUR', 'scholrroles.behaviour.UserBehaviour')
-registry.register(import_from_string(user_behaviour_name))
+registry.register(import_class_from_string(user_behaviour_name))
 
 def autodiscover():
     """
