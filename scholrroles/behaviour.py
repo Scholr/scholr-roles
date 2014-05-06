@@ -13,7 +13,7 @@ class RoleBehaviour(object):
         return True
 
     def has_role_for(self, obj):
-        if self.has_role() and self.ids:
+        if self.has_role() and self.ids and obj:
             if obj._meta.object_name in self.object_accessors:
                 return get_value_from_accessor(obj, self.object_accessors[obj._meta.object_name]) in self.ids
         return True 
