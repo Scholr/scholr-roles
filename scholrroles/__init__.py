@@ -19,11 +19,10 @@ def import_from_string(name):
         mod = getattr(mod, comp)
     return mod
 
-user_behaviour = UserBehaviour
-if settings.SCHOLR_ROLES_USER_BEHAVIOUR:
-    user_behaviour = import_from_string(settings.SCHOLR_ROLES_USER_BEHAVIOUR)
 
-registry.register(user_behaviour)
+#REGISTER USER ROLE BEHAVIOUR
+user_behaviour_name =getattr(settings, 'SCHOLR_ROLES_USER_BEHAVIOUR', 'scholrroles.behaviour.UserBehaviour')
+registry.register(import_from_string(user_behaviour_name))
 
 def autodiscover():
     """
