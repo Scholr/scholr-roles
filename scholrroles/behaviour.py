@@ -10,7 +10,7 @@ class RoleBehaviour(object):
         self.request = request
 
     def has_role(self):
-        return True
+        return False
 
     def has_role_for(self, obj):
         if self.has_role() and self.ids and obj:
@@ -19,6 +19,9 @@ class RoleBehaviour(object):
         return True 
 
 
+class UserBehaviour(RoleBehaviour):
+    def has_role(self):
+        return True
 
 def role_behaviour_factory():
     return RoleBehaviour
