@@ -14,7 +14,7 @@ def initiate_roles(sender, request, **kwargs):
 
 def import_class_from_string(name):
     split = name.split('.')
-    mod = __import__(split[:-2], fromlist= [split[-1]] )
+    mod = __import__('.'.join(split[:-2]), fromlist= [split[-1]] )
     mod = getattr(mod, split[-1])
     return mod
 
