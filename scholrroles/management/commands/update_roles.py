@@ -115,8 +115,8 @@ class Command(BaseCommand):
                 existing_perm.roles.add(Role.objects.get(name=role))
 
         to_delete = existing_perm.roles.exclude(name__in = perm['roles'])
-        if to_delete:
-            print u"        Deleting roles from: {}, {}".format(existing_perm,to_delete)
-            existing_perm.roles.remove(to_delete)
+        for role in to_delete:
+            print u"        Deleting role from: {}, {}".format(existing_perm,role)
+            existing_perm.roles.remove(role)
 
 
