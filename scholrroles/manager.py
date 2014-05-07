@@ -10,7 +10,6 @@ class PermissionManager(object):
         self.roles = {}
         for role in Role.objects.all():
             role_manager = registry.get_role(role.name)(user,request)
-            print self.roles, role_manager.role, role_manager.has_role()
             if role_manager.has_role():
                 self.roles[role.name] = role_manager
         self._permissions = Permission.objects.filter(roles__name__in = self.roles.keys()).values_list('pk', flat=True)
