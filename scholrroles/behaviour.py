@@ -20,6 +20,7 @@ class RoleBehaviour(object):
 
     def can_apply_permission(self, obj, perm):
         method = 'has_{}_{}_permission'.format(self.role, perm.name)
+        print method, hasattr(obj, method), getattr(obj, method), callable(getattr(obj, method))
         if hasattr(obj, method):
             function = getattr(obj, method)
             if callable(function):
