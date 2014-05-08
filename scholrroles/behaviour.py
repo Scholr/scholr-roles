@@ -14,8 +14,8 @@ class RoleBehaviour(object):
 
     def has_role_for(self, obj):
         if self.has_role() and self.ids and obj:
-            if self.role in obj._meta.role_accessors:
-                return get_value_from_accessor(obj, obj._meta.role_accessors[self.role]) in self.ids
+            if self.role in obj.role_accessors:
+                return get_value_from_accessor(obj, obj.role_accessors[self.role]) in self.ids
         return True
 
     def can_apply_permission(self, obj, perm):

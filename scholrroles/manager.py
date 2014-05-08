@@ -4,10 +4,10 @@ from scholrroles import registry
 from scholrroles.models import Role, Permission
 
 class PermissionManager(object):
-    roles = {}
     _permissions = None
 
     def __init__(self, user, request = None):
+        self.roles = {}
         for role in Role.objects.all():
             role_manager = registry.get_role(role.name)(user,request)
             if role_manager.has_role():
@@ -40,8 +40,10 @@ class PermissionManager(object):
             perm = self.permissions.get(name=perm_name, content_type = ctype, instance_perm = obj != None)
             if obj:
                 for role in perm.roles.all():
-                    if role.name in self.roles and self.roles[role.name].has_role_for(obj):
-                        return True
+                    if role.name in self.roles:
+                        role_manager = self.roles[role.name]
+                        if role_manager.has_role_for(obj) and role_manager.can_apply_permission(obj, perm):
+                            return True
                 return False
             else:
                 return True
