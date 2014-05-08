@@ -1,11 +1,8 @@
 from django.contrib.auth.backends import ModelBackend
-from django.db.models.loading import get_model
 
 class RolesBackend(ModelBackend):
 
     def has_perm(self, user_obj, perm, obj=None):
-        has_perm = user_obj.permissions.has_perm(perm, obj)
-        print perm,obj, has_perm
         return user_obj.permissions.has_perm(perm, obj)
 
 
