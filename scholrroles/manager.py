@@ -42,6 +42,7 @@ class PermissionManager(object):
                 for role in perm.roles.all():
                     if role.name in self.roles:
                         role_manager = self.roles[role.name]
+                        print role.name, role_manager.has_role_for(obj) and role_manager.can_apply_permission(obj, perm)
                         if role_manager.has_role_for(obj) and role_manager.can_apply_permission(obj, perm):
                             return True
                 return False
