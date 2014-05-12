@@ -33,6 +33,7 @@ class PermissionManager(object):
         return []
 
     def has_perm(self, perm, obj =None):
+        print perm
         try:
             split = perm.split('_')
             app_label, model, perm_name = split[0], split[1], '_'.join(split[2:])
