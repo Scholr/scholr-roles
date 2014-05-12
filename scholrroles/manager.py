@@ -38,6 +38,7 @@ class PermissionManager(object):
             app_label, model, perm_name = split[0], split[1], '_'.join(split[2:])
             ctype = ContentType.objects.get_by_natural_key(app_label, model)
             perm = self.permissions.get(name=perm_name, content_type = ctype, instance_perm = obj != None)
+            print perm
             if obj:
                 for role in perm.roles.all():
                     if role.name in self.roles:
@@ -48,5 +49,6 @@ class PermissionManager(object):
                 return False
             else:
                 return True
-        except:
+        except Exception as e:
+            print e
             return False
