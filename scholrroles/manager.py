@@ -32,6 +32,7 @@ class PermissionManager(object):
         return []
 
     def has_perm(self, perm, obj =None):
+        print perm
         try:
             split = perm.split('_')
             app_label, model, perm_name = split[0], split[1], '_'.join(split[2:])
@@ -40,11 +41,12 @@ class PermissionManager(object):
                 for role in perm.roles.all():
                     if role.name in self.roles:
                         role_manager = self.roles[role.name]
+                        print role.name, role_manager.has_role_for(obj) and role_manager.can_apply_permission(obj, perm)
                         if role_manager.has_role_for(obj) and role_manager.can_apply_permission(obj, perm):
                             return True
                 return False
             else:
                 return True
         except Exception as e:
-            print perm, obj, e
+            print e
             return False
