@@ -14,6 +14,6 @@ setup(
     description='Django permissions engine.',
     long_description=open('README.txt').read(),
     install_requires=[
-        "Django >= 1.5",
+        "Django == 1.5.1",
     ],
 )
