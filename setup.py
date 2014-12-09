@@ -3,7 +3,7 @@ from io import open
 
 setup(
     name='ScholrRoles',
-    version='0.0.27',
+    version='0.1.01',
     author='Jorge Alpedrinha Ramos',
     author_email='jalpedrinharamos@gmail.com',
     packages=find_packages(),
