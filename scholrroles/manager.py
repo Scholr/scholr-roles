@@ -1,5 +1,3 @@
-from django.contrib.contenttypes.models import ContentType
-
 from scholrroles import registry
 from scholrroles.models import Role, Permission
 
@@ -16,6 +14,7 @@ class PermissionManager(object):
     
     @property
     def permissions(self):
+        print self._permissions
         return Permission.objects.filter(pk__in=self._permissions)
     
     def has_role(self, name, obj = None):
@@ -36,8 +35,7 @@ class PermissionManager(object):
         try:
             split = perm.split('_')
             app_label, model, perm_name = split[0], split[1], '_'.join(split[2:])
-            ctype = ContentType.objects.get_by_natural_key(app_label, model)
-            perm = self.permissions.get(name=perm_name, content_type = ctype, instance_perm = obj != None)
+            perm = self.permissions.get(name=perm_name, content_type__app_label = app_label, content_type__model=model, instance_perm = obj != None)
             if obj:
                 for role in perm.roles.all():
                     if role.name in self.roles:
